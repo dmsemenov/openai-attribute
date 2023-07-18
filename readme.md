@@ -1,4 +1,7 @@
-# OpenaiAttribute
+# Laravel OpenaiAttribute
+
+Allow to define OpenAI generated attributes for Laravel model.
+Package currently support only `text-davinci-003` model but other options will be added soon.
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -11,8 +14,23 @@ This is where your description should go. Take a look at [contributing.md](contr
 
 Via Composer
 
+Add to `composer.json`
 ``` bash
-$ composer require dmsemenov/openai-attribute
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "git@github.com:yuraplohov/laravel-example.git"
+    }
+]
+```
+
+``` bash
+ composer require dmsemenov/openai-attribute
+```
+Publish config:
+
+``` bash
+ php artisan vendor:publish --provider="Dmsemenov\OpenaiAttribute\OpenaiAttributeServiceProvider"
 ```
 
 ## Usage
