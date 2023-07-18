@@ -6,9 +6,8 @@ Contributions are accepted via Pull Requests on [Github](https://github.com/dmse
 
 # Things you could do
 If you want to contribute but do not know where to start, this list provides some starting points.
+- Set up TravisCI, StyleCI, ScrutinizerCI, PHPStan
 - Add license text
-- Remove rewriteRules.php
-- Set up TravisCI, StyleCI, ScrutinizerCI
 - Write a comprehensive ReadMe
 
 ## Pull Requests
