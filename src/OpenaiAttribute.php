@@ -19,7 +19,7 @@ class OpenaiAttribute
     public function getPrompt(Model $model, string $attributeName): ?string
     {
         try {
-            $prompt = $model->generatedAttributes()[$attributeName]['prompt'] ?? '';
+            $prompt = Arr::get($model->generatedAttributes(), "{$attributeName}.prompt");
 
             $replaced = preg_replace_callback(
                 "/\[model:\w*\]/",
@@ -44,7 +44,7 @@ class OpenaiAttribute
      */
     public function generate(Model $model): void
     {
-        $client = OpenAI::client(config('openai-attribute.openai_api_key'));
+        $modelUpdated = false;
 
         foreach ($model->generatedAttributes() as $attributeName => $attributeConfig) {
             $prompt = $this->getPrompt($model, $attributeName);
@@ -52,18 +52,29 @@ class OpenaiAttribute
                 continue;
             }
 
-            $attributeConfig['prompt'] = $prompt;
-            $extraParams = array_merge(config('openai-attribute.text-davinci-003'), $attributeConfig);
+            $requestBody = array_merge(config('openai-attribute.default_options'), Arr::except($attributeConfig, ['prompt']));
 
-            $result = $client->completions()->create([
-                'model' => 'text-davinci-003',
-                ...$extraParams
-            ]);
-
-            if ($text = Arr::get($result, 'choices.0.text')) {
-                $model->$attributeName = $text;
-                $model->save();
+            $client = OpenAI::client(config('openai-attribute.api_key'));
+            try {
+                $result = $client->chat()->create([
+                    ...$requestBody,
+                    'messages' => [
+                        ['role' => 'user', 'content' => $prompt]
+                    ]
+                ]);
+            } catch (\Throwable $exception) {
+                Log::error($exception->getMessage());
+                return;
             }
+
+            if ($text = Arr::get($result, 'choices.0.message.context')) {
+                $modelUpdated = true;
+                $model->generatedTextAlter($attributeName, $text);
+            }
+        }
+
+        if ($modelUpdated) {
+            $model->save();
         }
     }
 }

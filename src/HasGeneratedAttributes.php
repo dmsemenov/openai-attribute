@@ -32,4 +32,16 @@ trait HasGeneratedAttributes
     {
         return true;
     }
+
+    /**
+     * Alter generated text if needed
+     *
+     * @param string $attributeName
+     * @param string $text
+     * @return void
+     */
+    public function generatedTextAlter(string $attributeName, string $text): void
+    {
+        $this->$attributeName = $text;
+    }
 }
