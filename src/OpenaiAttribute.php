@@ -67,7 +67,7 @@ class OpenaiAttribute
                 return;
             }
 
-            if ($text = Arr::get($result, 'choices.0.message.context')) {
+            if ($text = Arr::get($result, 'choices.0.message.content')) {
                 $modelUpdated = true;
                 $model->generatedTextAlter($attributeName, $text);
             }
