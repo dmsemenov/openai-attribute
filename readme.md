@@ -2,10 +2,9 @@
 
 Allows defining OpenAI generated attributes for Laravel model.
 
+[![GitHub license](https://img.shields.io/github/license/ruvents/runet-id-php-client.svg?style=flat-square)](https://github.com/dmsemenov/openai-attribute/blob/master/license.md)
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
 
 This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
 
