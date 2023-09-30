@@ -1,12 +1,10 @@
 # Laravel OpenaiAttribute
 
-Allows defining OpenAI generated attributes for Laravel model.
-
 [![GitHub license](https://img.shields.io/github/license/ruvents/runet-id-php-client.svg?style=flat-square)](https://github.com/dmsemenov/openai-attribute/blob/master/license.md)
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
+Laravel package that allows to define ChatGPT generated attributes for Laravel model like description or other "text" attribute.
 
 ## Installation
 
@@ -14,8 +12,7 @@ This is where your description should go. Take a look at [contributing.md](contr
 ``` bash
  composer require dmsemenov/openai-attribute
 ```
-- Add your OpenAI api key `OPENAI_API_KEY` to `.env`.    
-Key can be found here https://platform.openai.com/account/api-keys
+- Add your OpenAI api key `OPENAI_API_KEY` to `.env`. Key can be found here: https://platform.openai.com/account/api-keys
 
 ## Configuration
  
@@ -24,7 +21,7 @@ Publish config if needed:
  php artisan vendor:publish --provider="Dmsemenov\OpenaiAttribute\OpenaiAttributeServiceProvider"
 ```
 It is possible to specify request options in published config or in the model `generatedAttributes()` method.  
-Available request options see https://platform.openai.com/docs/api-reference/chat/create
+Available request options see at [OpenApi documentation page](https://platform.openai.com/docs/api-reference/chat/create).
 ``` php
     // OpenAI api key
     'api_key' => env('OPENAI_API_KEY'),
